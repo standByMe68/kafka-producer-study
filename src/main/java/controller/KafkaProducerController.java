@@ -1,21 +1,26 @@
 package controller;
 
 
+import scala.actors.threadpool.Arrays;
 import util.KafkaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class KafkaProducerController {
 
     public static void main(String[] args) {
 
-        List<String> datas = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 0 ; i < 1; i++){
-            datas.add("study_"+i);
+        while(true){
+            System.out.println("请输入需要发送的内容");
+            String data = scanner.next();
+            String[] datas = data.split(",");
+            KafkaUtil.send(Arrays.asList(datas));
+
         }
-        KafkaUtil.send(datas);
     }
 
 }
